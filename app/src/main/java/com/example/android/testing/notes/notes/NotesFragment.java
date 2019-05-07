@@ -21,6 +21,7 @@ import com.example.android.testing.notes.addnote.AddNoteActivity;
 import com.example.android.testing.notes.notedetail.NoteDetailActivity;
 import com.example.android.testing.notes.R;
 import com.example.android.testing.notes.data.Note;
+import com.example.android.testing.notes.util.EspressoIdlingResource;
 
 import android.app.Activity;
 import android.content.Context;

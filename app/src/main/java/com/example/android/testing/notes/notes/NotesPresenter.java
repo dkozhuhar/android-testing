@@ -56,11 +56,12 @@ public class NotesPresenter implements NotesContract.UserActionsListener {
         mNotesRepository.getNotes(new NotesRepository.LoadNotesCallback() {
             @Override
             public void onNotesLoaded(List<Note> notes) {
-                EspressoIdlingResource.decrement(); // Set app as idle.
+
                 mNotesView.setProgressIndicator(false);
                 mNotesView.showNotes(notes);
             }
         });
+        EspressoIdlingResource.decrement(); // Set app as idle.
     }
 
     @Override

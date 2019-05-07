@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingRegistry;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -88,26 +89,26 @@ public class NoteDetailScreenTest {
      */
     @Before
     public void intentWithStubbedNoteId() {
-//        // Add a note stub to the fake service api layer.
-//        FakeNotesServiceApiImpl.addNotes(NOTE);
-//
-//        // Lazily start the Activity from the ActivityTestRule this time to inject the start Intent
-//        Intent startIntent = new Intent();
-//        startIntent.putExtra(NoteDetailActivity.EXTRA_NOTE_ID, NOTE.getId());
-//        mNoteDetailActivityTestRule.launchActivity(startIntent);
-//
-//        registerIdlingResource();
+        // Add a note stub to the fake service api layer.
+        FakeNotesServiceApiImpl.addNotes(NOTE);
+
+        // Lazily start the Activity from the ActivityTestRule this time to inject the start Intent
+        Intent startIntent = new Intent();
+        startIntent.putExtra(NoteDetailActivity.EXTRA_NOTE_ID, NOTE.getId());
+        mNoteDetailActivityTestRule.launchActivity(startIntent);
+
+        registerIdlingResource();
     }
 
     @Test
     public void noteDetails_DisplayedInUi() throws Exception {
-        fail("Implement step 7");
-//        // Check that the note title, description and image are displayed
-//        onView(withId(R.id.note_detail_title)).check(matches(withText(NOTE_TITLE)));
-//        onView(withId(R.id.note_detail_description)).check(matches(withText(NOTE_DESCRIPTION)));
-//        onView(withId(R.id.note_detail_image)).check(matches(allOf(
-//                hasDrawable(),
-//                isDisplayed())));
+        //fail("Implement step 7");
+        // Check that the note title, description and image are displayed
+        onView(withId(R.id.note_detail_title)).check(matches(withText(NOTE_TITLE)));
+        onView(withId(R.id.note_detail_description)).check(matches(withText(NOTE_DESCRIPTION)));
+        onView(withId(R.id.note_detail_image)).check(matches(allOf(
+                hasDrawable(),
+                isDisplayed())));
     }
 
     /**
@@ -115,7 +116,7 @@ public class NoteDetailScreenTest {
      */
     @After
     public void unregisterIdlingResource() {
-        Espresso.unregisterIdlingResources(
+        IdlingRegistry.getInstance().unregister(
                 mNoteDetailActivityTestRule.getActivity().getCountingIdlingResource());
     }
 
@@ -125,7 +126,7 @@ public class NoteDetailScreenTest {
      * synchronize your test actions, which makes tests significantly more reliable.
      */
     private void registerIdlingResource() {
-        Espresso.registerIdlingResources(
+        IdlingRegistry.getInstance().register(
                 mNoteDetailActivityTestRule.getActivity().getCountingIdlingResource());
     }
 }

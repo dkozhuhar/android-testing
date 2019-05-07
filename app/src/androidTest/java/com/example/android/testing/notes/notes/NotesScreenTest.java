@@ -124,8 +124,8 @@ public class NotesScreenTest {
         // Save the note
         onView(withId(R.id.fab_add_notes)).perform(click());
 
-        //This test is flaky. Simple check is to tell Espresso to sleep
-        Thread.sleep(5000);
+        //This test is flaky for prodDebug flavor. This fixes it.
+        Thread.sleep(500);
 
         // Scroll notes list to added note, by finding its description
         onView(withId(R.id.notes_list)).perform(
